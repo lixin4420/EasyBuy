@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.easybuy.dao.user.UserMapper">
+	<!--根据id或者用户名查询用户-->
+	<select id="getUser" resultType="User">
+		SELECT
+		id,
+		loginName,
+		userName,
+		PASSWORD,
+		sex,
+		identityCode,
+		email,
+		mobile,
+		TYPE
+		FROM
+		easybuy_user
+		WHERE 1 = 1
+		<if test="id!=null">
+			AND id = #{id}
+		</if>
+		<if test="loginName!=null and loginName!=''">
+			AND loginName = #{loginName}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		SELECT COUNT(*) COUNT FROM easybuy_user WHERE 1=1
+	</select>
+
+	<select id="getUserList" resultType="User">
+		SELECT
+		  id,
+		  loginName,
+		  PASSWORD,
+		  userName,
+		  sex,
+		  identityCode,
+		  email,
+		  mobile,
+		  TYPE
+		FROM
+		  easybuy_user
+		WHERE 1 = 1
+		LIMIT #{startNo}, #{pageSize};
+	</select>
+
+	<update id="update" parameterType="User">
+		UPDATE
+		  easybuy_user
+		SET
+		  loginName = #{loginName},
+		  userName = #{userName},
+		  TYPE = #{type},
+		  sex = #{sex},
+		  identityCode = #{identityCode},
+		  email = #{email},
+		  mobile = #{mobile}
+		WHERE id = #{id}
+	</update>
+
+</mapper>

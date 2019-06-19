@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.easybuy.dao.news.NewsMapper">
+    <select id="queryNewsCount" resultType="int">
+    select count(*) count FROM easybuy_news where 1=1
+    </select>
+    <select id="queryNewsList" resultType="News">
+       SELECT
+          id,
+          title,
+          content,
+          createTime
+        FROM
+          easybuy_news
+        WHERE 1 = 1
+    </select>
+</mapper>
